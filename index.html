@@ -289,76 +289,87 @@
       opacity: 0.75;
     }
 
-    /* 行业痛点对比板块样式 */
-    .compare-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-top: 40px;
-    }
+/* 行业痛点对比板块样式 */
+.compare-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
 
-    .compare-card {
-      padding: 36px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+.compare-card {
+  padding: 36px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* 新增：防止内容溢出 */
+  overflow: hidden;
+}
 
-    .compare-card.problem {
-      border-left: 3px solid #ff7b7b;
-    }
+.compare-card.problem {
+  border-left: 3px solid #ff7b7b;
+}
 
-    .compare-card.solution {
-      border-left: 3px solid #3b82f6;
-    }
+.compare-card.solution {
+  border-left: 3px solid #3b82f6;
+}
 
-    .compare-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.compare-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .compare-title.problem {
-      color: #ff8787;
-    }
+.compare-title.problem {
+  color: #ff8787;
+}
 
-    .compare-title.solution {
-      color: #3b82f6;
-    }
+.compare-title.solution {
+  color: #3b82f6;
+}
 
-    .compare-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+.compare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-    .compare-item {
-      color: #b0b2b8;
-      font-size: 1rem;
-      line-height: 1.6;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
+.compare-item {
+  color: #b0b2b8;
+  font-size: 1rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  /* 新增：强制文字自动换行 */
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
 
-    .compare-item span {
-      margin-top: 4px;
-      flex-shrink: 0;
-    }
+.compare-item span {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
 
-    /* 移动端适配 */
-    @media (max-width:768px) {
-      .compare-wrap {
-        grid-template-columns: 1fr;
-      }
+/* 移动端适配 - 优化卡片内边距和文字大小 */
+@media (max-width:768px) {
+  .compare-wrap {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
-      .compare-card {
-        padding: 28px 24px;
-      }
-    }
+  .compare-card {
+    padding: 24px 20px; /* 缩小内边距，给文字更多空间 */
+  }
+
+  .compare-item {
+    font-size: 0.95rem; /* 移动端文字稍缩小，更适配 */
+  }
+}
 
     /* 第三板块｜核心王牌：六大AI数字员工 */
     .ai-employees-section {
