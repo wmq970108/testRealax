@@ -183,15 +183,15 @@
       /* 比左边卡片再晚一点，形成错落感 */
     }
 
-.animate-show {
-  opacity: 1 !important;
-  transform: translate(0) !important;
-  /* 保留动画，但不强制覆盖布局！ */
-  width: auto !important;
-  max-width: 100% !important;
-  white-space: normal !important;
-  word-break: break-word !important;
-}
+    .animate-show {
+      opacity: 1 !important;
+      transform: translate(0) !important;
+      /* 保留动画，但不强制覆盖布局！ */
+      width: auto !important;
+      max-width: 100% !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+    }
 
     /* 按钮样式 极简冷调按钮 */
     .base-btn {
@@ -294,113 +294,113 @@
       opacity: 0.75;
     }
 
-/* 行业痛点对比板块样式 - 手机端完美适配版 */
-.compare-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-top: 40px;
-}
+    /* 行业痛点对比板块样式 - 手机端完美适配版 */
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
 
-.compare-card {
-  padding: 36px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  /* 关键修复1：锁死宽度，禁止溢出 */
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: visible;
-}
+    .compare-card {
+      padding: 36px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      /* 关键修复1：锁死宽度，禁止溢出 */
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: visible;
+    }
 
-.compare-card.problem {
-  border-left: 3px solid #ff7b7b;
-}
+    .compare-card.problem {
+      border-left: 3px solid #ff7b7b;
+    }
 
-.compare-card.solution {
-  border-left: 3px solid #3b82f6;
-}
+    .compare-card.solution {
+      border-left: 3px solid #3b82f6;
+    }
 
-.compare-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .compare-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.compare-title.problem {
-  color: #ff8787;
-}
+    .compare-title.problem {
+      color: #ff8787;
+    }
 
-.compare-title.solution {
-  color: #3b82f6;
-}
+    .compare-title.solution {
+      color: #3b82f6;
+    }
 
-.compare-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+    .compare-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-.compare-item {
-  color: #b0b2b8;
-  font-size: 1rem;
-  line-height: 1.6;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  white-space: normal !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  max-width: 100% !important;
-  flex: 1;
-}
+    .compare-item {
+      color: #b0b2b8;
+      font-size: 1rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      max-width: 100% !important;
+      flex: 1;
+    }
 
-.compare-item span {
-  margin-top: 4px;
-  flex-shrink: 0;
-}
-/* 强制所有 compare-item 里的文本 span 折行 */
-.compare-item > span:last-child {
-  display: block;
-  flex: 1;
-  white-space: normal !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  min-width: 0; /* 解决 flex 子元素不收缩的问题 */
-}
-/* 移动端适配 - 优化卡片内边距和文字大小 */
-@media (max-width:768px) {
-  .compare-wrap {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+    .compare-item span {
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    /* 强制所有 compare-item 里的文本 span 折行 */
+    .compare-item>span:last-child {
+      display: block;
+      flex: 1;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      min-width: 0;
+      /* 解决 flex 子元素不收缩的问题 */
+    }
+    /* 移动端适配 - 优化卡片内边距和文字大小 */
+    @media (max-width:768px) {
+      .compare-wrap {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
 
-  .compare-card {
-    /* 关键修复3：大幅缩小手机端内边距，给文字留出更多空间 */
-    padding: 16px 14px !important;
-    max-width: 100% !important;
-  }
+      .compare-card {
+        /* 关键修复3：大幅缩小手机端内边距，给文字留出更多空间 */
+        padding: 16px 14px !important;
+        max-width: 100% !important;
+      }
 
-  .compare-title {
-    font-size: 1.15rem;
-    margin-bottom: 18px;
-  }
+      .compare-title {
+        font-size: 1.15rem;
+        margin-bottom: 18px;
+      }
 
-  .compare-item {
-    /* 关键修复4：手机端文字稍微缩小，避免挤不下 */
-    font-size: 0.92rem;
-    line-height: 1.55;
-    gap: 8px !important;
-  }
-}
+      .compare-item {
+        /* 关键修复4：手机端文字稍微缩小，避免挤不下 */
+        font-size: 0.92rem;
+        line-height: 1.55;
+        gap: 8px !important;
+      }
+    }
     /* 第三板块｜核心王牌：六大AI数字员工 */
     .ai-employees-section {
       padding: 70px 0;
     }
-
     .ai-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -533,7 +533,9 @@
       .ai-grid {
         grid-template-columns: 1fr;
       }
-
+      .ai-grid .chat-box-wrap {
+        order: -1;
+      }
       .chat-box {
         order: -1;
         height: 320px;
@@ -556,6 +558,25 @@
       object-fit: cover;
       display: block;
     }
+    /* 第七板块城市卡片手机端适配 */
+    @media (max-width: 768px) {
+      .fade-left[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .city-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* 手风琴样式，完全适配你网站的深色主题 */
     .accordion-container {
       display: flex;
@@ -856,20 +877,20 @@
       }
     }
     .hero-bg-video::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(7, 7, 9, 0.75), rgba(7, 7, 9, 0.4));
-          z-index: 1;
-        }
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(7, 7, 9, 0.75), rgba(7, 7, 9, 0.4));
+      z-index: 1;
+    }
 
-        .hero-content {
-          position: relative;
-          z-index: 2;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
   </style>
 </head>
 
@@ -1015,13 +1036,11 @@
       <h2 class="sec-title fade-left">6 AI Digital Employees: 24/7 Operation Engine</h2>
       <p class="fade-left" style="color:#a1a4ac;max-width:700px;">
         Not just chatbots—our AI employees are full-time digital staff with exclusive operational memory and human-like
-        conversational logic. They don’t just answer questions—they ask, clarify, and remind you proactively.
+        conversational logic. They don't just answer questions—they ask, clarify, and remind you proactively.
       </p>
 
-      <div class="ai-grid"
-        style="position:relative; display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px; align-items:flex-start;">
-
-        <!-- 左侧：滚动 + 依次滑入动画 -->
+      <div class="ai-grid">
+        <!-- 左侧：员工列表 -->
         <div class="slide-cards-left" style="display:flex; flex-direction:column; gap:24px;">
           <div class="ai-card-slide">
             <h4>Intelligent Interactive Advisor</h4>
@@ -1244,7 +1263,7 @@
       </div>
 
       <!-- 城市布局卡片 -->
-      <div class="fade-left" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+      <div class="city-grid fade-left">
         <div class="ai-card-slide text-center">
           <h4>Baltimore</h4>
           <p>Local standardized property operation service</p>
@@ -1618,60 +1637,61 @@
       </div>
     </div>
   </section>
-    <div class="spacer"></div>
+  <div class="spacer"></div>
   <!-- CTA底部引导｜定制行动收口 -->
-<section class="section">
-  <div class="container cta-box">
-    <div class="label-text" style="justify-content:center;">
-      <span class="label-dot"></span>
-      <span>Start Your Upgrade Journey</span>
+  <section class="section">
+    <div class="container cta-box">
+      <div class="label-text" style="justify-content:center;">
+        <span class="label-dot"></span>
+        <span>Start Your Upgrade Journey</span>
+      </div>
+      <h2 class="sec-title fade-left" style="max-width:700px;margin:0 auto 16px;">
+        Zero-cost entry, revolutionize your asset management workflow
+      </h2>
+      <p class="fade-left" style="color:#a1a4ac;font-size:1.05rem;margin-bottom:30px;">
+        Private one-on-one demonstration | Tailored asset custody solution | Free access to intelligent AI management
+      </p>
+      <div class="fade-left" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+        <a href="contact.html?type=inquiry" class="base-btn">Business Inquiry</a>
+        <a href="contact.html?type=demo" class="base-btn">Reserve Demo</a>
+      </div>
     </div>
-    <h2 class="sec-title fade-left" style="max-width:700px;margin:0 auto 16px;">
-      Zero-cost entry, revolutionize your asset management workflow
-    </h2>
-    <p class="fade-left" style="color:#a1a4ac;font-size:1.05rem;margin-bottom:30px;">
-      Private one-on-one demonstration | Tailored asset custody solution | Free access to intelligent AI management
-    </p>
-    <div class="fade-left" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
-      <a href="contact.html?type=inquiry" class="base-btn">Business Inquiry</a>
-      <a href="contact.html?type=demo" class="base-btn">Reserve Demo</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- 页脚 -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h3>Subscribe</h3>
-        <p style="color:#94979f;margin-bottom:15px;">Subscribe to our weekly newsletter for updates, trends, and regulatory news</p>
-        <form action="https://formsubmit.co/support@realaxai.com" method="POST">
-          <input type="hidden" name="_subject" value="Realax Newsletter Subscription">
-          <input type="hidden" name="_next" value="thankYou.html">
-          <input class="footer-input" name="email" placeholder="Your Email" type="email" required>
-          <button class="footer-submit" type="submit">Sign Up</button>
-        </form>
-      </div>
-      <div>
-        <div class="label-text">
-          <span class="label-dot"></span>
-          <span>Quick Links</span>
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Subscribe</h3>
+          <p style="color:#94979f;margin-bottom:15px;">Subscribe to our weekly newsletter for updates, trends, and
+            regulatory news</p>
+          <form action="https://formsubmit.co/support@realaxai.com" method="POST">
+            <input type="hidden" name="_subject" value="Realax Newsletter Subscription">
+            <input type="hidden" name="_next" value="thankYou.html">
+            <input class="footer-input" name="email" placeholder="Your Email" type="email" required>
+            <button class="footer-submit" type="submit">Sign Up</button>
+          </form>
         </div>
-        <a href="./" class="footer-link">Home</a>
-        <a href="contact.html" class="footer-link">Contact</a>
-      </div>
-      <div>
-        <div class="label-text">
-          <span class="label-dot"></span>
-          <span>Contact</span>
+        <div>
+          <div class="label-text">
+            <span class="label-dot"></span>
+            <span>Quick Links</span>
+          </div>
+          <a href="./" class="footer-link">Home</a>
+          <a href="contact.html" class="footer-link">Contact</a>
         </div>
-        <a href="mailto:support@realaxai.com" class="footer-link">support@realaxai.com</a>
+        <div>
+          <div class="label-text">
+            <span class="label-dot"></span>
+            <span>Contact</span>
+          </div>
+          <a href="mailto:support@realaxai.com" class="footer-link">support@realaxai.com</a>
+        </div>
       </div>
+      <div class="copyright">© 2026 Realax AI. All rights reserved.</div>
     </div>
-    <div class="copyright">© 2026 Realax AI. All rights reserved.</div>
-  </div>
-</footer>
+  </footer>
   <script>
     // 1. 滚动入场动画
     const animateEls = document.querySelectorAll('.fade-left, .fade-up, .fade-card-left, .fade-card-right');
