@@ -183,10 +183,15 @@
       /* 比左边卡片再晚一点，形成错落感 */
     }
 
-    .animate-show {
-      opacity: 1 !important;
-      transform: translate(0) !important;
-    }
+.animate-show {
+  opacity: 1 !important;
+  transform: translate(0) !important;
+  /* 保留动画，但不强制覆盖布局！ */
+  width: auto !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
 
     /* 按钮样式 极简冷调按钮 */
     .base-btn {
@@ -289,7 +294,7 @@
       opacity: 0.75;
     }
 
-/* 行业痛点对比板块样式 */
+/* 行业痛点对比板块样式 - 手机端完美适配版 */
 .compare-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -302,8 +307,10 @@
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  /* 新增：防止内容溢出 */
-  overflow: hidden;
+  /* 关键修复1：锁死宽度，禁止溢出 */
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .compare-card.problem {
@@ -344,17 +351,26 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  /* 新增：强制文字自动换行 */
-  word-break: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+  flex: 1;
 }
 
 .compare-item span {
   margin-top: 4px;
   flex-shrink: 0;
 }
-
+/* 强制所有 compare-item 里的文本 span 折行 */
+.compare-item > span:last-child {
+  display: block;
+  flex: 1;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  min-width: 0; /* 解决 flex 子元素不收缩的问题 */
+}
 /* 移动端适配 - 优化卡片内边距和文字大小 */
 @media (max-width:768px) {
   .compare-wrap {
@@ -363,14 +379,23 @@
   }
 
   .compare-card {
-    padding: 24px 20px; /* 缩小内边距，给文字更多空间 */
+    /* 关键修复3：大幅缩小手机端内边距，给文字留出更多空间 */
+    padding: 16px 14px !important;
+    max-width: 100% !important;
+  }
+
+  .compare-title {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
   }
 
   .compare-item {
-    font-size: 0.95rem; /* 移动端文字稍缩小，更适配 */
+    /* 关键修复4：手机端文字稍微缩小，避免挤不下 */
+    font-size: 0.92rem;
+    line-height: 1.55;
+    gap: 8px !important;
   }
 }
-
     /* 第三板块｜核心王牌：六大AI数字员工 */
     .ai-employees-section {
       padding: 70px 0;
