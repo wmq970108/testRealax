@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relaxor</title>
+  <meta name="description"
+    content="Empower your real estate investment team with Relaxar, the AI-powered platform that turns data chaos into actionable insights. Automate analysis, optimize portfolios, and make smarter decisions—faster and with less risk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <style>
+    /* 全局重置 & 基础样式 欧美冷调改版 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Archivo', 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #070709;
+      line-height: 1.7;
+      letter-spacing: 0.2px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* 容器【重点调整】收窄最大宽度+缩减左右内边距 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .spacer {
+      height: 50px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* 固定导航栏 */
+    .fixed-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      padding: 10px 0;
+      background: rgba(7, 7, 9, 0.45);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      font-size: 17px;
+      color: #c8c9cc;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    /* 英雄区 */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.85;
+    }
+
+    .hero-bg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      padding-top: 110px;
+    }
+
+    .hero-headline-wrap {
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      color: #f5f6f8;
+      transform: translateY(100%);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-desc {
+      max-width: 580px;
+      font-size: 1.1rem;
+      margin: 28px 0;
+      color: #b0b2b8;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+
+    .hero-tagline {
+      color: #d1d3d8 !important;
+      font-weight: 500;
+    }
+
+    /* 升级后的入场动画 */
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      /* 初始位置往左挪得更远 */
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      /* 时间更长，曲线更顺滑 */
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      /* 初始位置往下挪得更远 */
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 给对比卡片单独加一个动画类，实现左右依次滑入 */
+    .fade-card-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.1s;
+      /* 比标题晚一点出现 */
+    }
+
+    .fade-card-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.3s;
+      /* 比左边卡片再晚一点，形成错落感 */
+    }
+
+    .animate-show {
+      opacity: 1 !important;
+      transform: translate(0) !important;
+    }
+
+    /* 按钮样式 极简冷调按钮 */
+    .base-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 38px;
+      border: 1px solid #999ba3;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s ease;
+      margin: 10px 0;
+      color: #e2e4e8;
+      font-weight: 500;
+    }
+
+    .base-btn::before {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #f5f6f8;
+      transition: left 0.35s ease;
+      z-index: -1;
+    }
+
+    .base-btn:hover::before {
+      left: 0;
+    }
+
+    .base-btn:hover {
+      color: #070709;
+      border-color: #f5f6f8;
+    }
+
+    .btn-arrow {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* 标签小标题 浅灰弱化 */
+    .label-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: #8a8c94;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .label-dot {
+      width: 9px;
+      height: 9px;
+      background: #8a8c94;
+      border-radius: 1px;
+    }
+
+    .sec-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin-bottom: 20px;
+      /* max-width: 660px; */
+      color: #eef0f5;
+      font-weight: 600;
+    }
+
+    /* 功能卡片 收紧间距 */
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .func-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 28px;
+      border-radius: 10px;
+      transition: transform 0.35s ease, border-color 0.35s ease;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .func-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .func-card h4 {
+      color: #eef0f5;
+      font-weight: 500;
+    }
+
+    .card-icon {
+      width: 48px;
+      margin-top: 20px;
+      opacity: 0.75;
+    }
+
+    /* 行业痛点对比板块样式 */
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .compare-card {
+      padding: 36px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .compare-card.problem {
+      border-left: 3px solid #ff7b7b;
+    }
+
+    .compare-card.solution {
+      border-left: 3px solid #3b82f6;
+    }
+
+    .compare-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-title.problem {
+      color: #ff8787;
+    }
+
+    .compare-title.solution {
+      color: #3b82f6;
+    }
+
+    .compare-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .compare-item {
+      color: #b0b2b8;
+      font-size: 1rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .compare-item span {
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* 移动端适配 */
+    @media (max-width:768px) {
+      .compare-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-card {
+        padding: 28px 24px;
+      }
+    }
+
+    /* 第三板块｜核心王牌：六大AI数字员工 */
+    .ai-employees-section {
+      padding: 70px 0;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      align-items: flex-start;
+    }
+
+    /* 左侧独立滚动容器 */
+
+    .ai-card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ai-card-slide {
+      padding: 24px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.35s ease;
+
+      /* 初始状态：右侧偏移 + 透明 */
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ai-card-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .ai-card-slide h4 {
+      color: #eef0f5;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-card-slide h4::before {
+      content: "●";
+      color: #3b82f6;
+      font-size: 12px;
+    }
+
+    .ai-card-slide p {
+      color: #a1a4ac;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* 右侧对话演示框 */
+    .chat-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      position: sticky;
+      top: 100px;
+    }
+
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      padding-bottom: 10px;
+    }
+
+    .chat-message {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.8s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .chat-message.user {
+      background: #4ade80;
+      color: #070709;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-message.ai {
+      background: rgba(255, 255, 255, 0.1);
+      color: #d1d3d8;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-avatar {
+      font-size: 0.8rem;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .user-avatar {
+      background: #070709;
+      color: #4ade80;
+    }
+
+    .ai-avatar {
+      background: #6ee7b7;
+      color: #070709;
+    }
+
+    .chat-message.user .chat-avatar {
+      order: 2;
+    }
+
+    /* 移动端适配 */
+    @media (max-width:768px) {
+      .ai-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-box {
+        order: -1;
+        height: 320px;
+      }
+    }
+
+    /* 视频模块 */
+    .video-box {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      margin: 50px 0;
+    }
+
+    .video-box video {
+      width: 100%;
+      height: auto;
+      min-height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+    /* 手风琴样式，完全适配你网站的深色主题 */
+    .accordion-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .accordion-item {
+      padding: 0;
+    }
+
+    .accordion-header {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #eef0f5;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .question-text {
+      flex: 1;
+    }
+
+    .accordion-icon {
+      font-size: 1.2rem;
+      color: #4b5563;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 24px;
+    }
+
+    .accordion-content p {
+      color: #a1a4ac;
+      line-height: 1.6;
+      padding-bottom: 20px;
+      margin: 0;
+    }
+
+    /* 展开状态样式 */
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 200px;
+    }
+    /* 数据统计 */
+    .stats-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 26px;
+      margin-top: 36px;
+    }
+
+    .stat-item {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #f5f6f8;
+    }
+
+    .stat-item p {
+      color: #94979f;
+      font-size: 0.94rem;
+    }
+
+    /* 大图图文区块 */
+    .img-content-block {
+      position: relative;
+      margin: 50px 0;
+    }
+
+    .bg-full-img {
+      width: 100%;
+      border-radius: 12px;
+      min-height: 460px;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    .img-text-content {
+      position: relative;
+      z-index: 2;
+      padding: 30px 0;
+    }
+
+    .img-text-content h2 {
+      color: #eef0f5;
+    }
+
+    /* 长滚动文字区块 居中收紧宽度 */
+    .scroll-text-section {
+      padding: 80px 0;
+      overflow: hidden;
+    }
+
+    .scrolll-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 780px;
+      margin: 0 auto;
+      color: #a1a4ac;
+    }
+
+    /* 轮播组件 */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.55s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .carousel-img {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .carousel-slide h4 {
+      color: #eef0f5;
+      margin-bottom: 14px;
+    }
+
+    .carousel-slide p {
+      color: #a1a4ac;
+    }
+
+    .caro-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(7, 7, 9, 0.4);
+      color: #c8c9cc;
+      transition: all 0.3s;
+    }
+
+    .caro-btn:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    .caro-prev {
+      left: 6px;
+    }
+
+    .caro-next {
+      right: 6px;
+    }
+
+    /* 底部CTA */
+    .cta-box {
+      text-align: center;
+      padding: 50px 0;
+    }
+
+    .large-cta-btn {
+      font-size: 1.2rem;
+      padding: 15px 38px;
+      border: 1px solid #c8c9cc;
+      display: inline-block;
+      margin-top: 18px;
+      transition: all 0.35s ease;
+      color: #eef0f5;
+      border-radius: 3px;
+    }
+
+    .large-cta-btn:hover {
+      background: #f5f6f8;
+      color: #070709;
+      border-color: #f5f6f8;
+    }
+
+    /* 页脚 低调冷调 */
+    .footer {
+      padding: 70px 0 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .footer h3 {
+      color: #eef0f5;
+      margin-bottom: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .footer-input {
+      width: 100%;
+      padding: 11px 14px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #eef0f5;
+      margin: 12px 0;
+      border-radius: 3px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    .footer-input:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-submit {
+      padding: 9px 20px;
+      background: #eef0f5;
+      color: #070709;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    .footer-link {
+      display: block;
+      margin: 10px 0;
+      color: #94979f;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: #eef0f5;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.88rem;
+      color: #787a82;
+    }
+
+    /* 响应式适配 */
+    @media (max-width:768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .carousel-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 50px 0;
+      }
+
+      .hero-headline {
+        font-size: 2.1rem;
+      }
+
+      .container {
+        padding: 0 14px;
+      }
+    }
+    .hero-bg-video::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, rgba(7, 7, 9, 0.75), rgba(7, 7, 9, 0.4));
+          z-index: 1;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
+        }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部导航 -->
+  <nav class="fixed-nav">
+    <div class="container nav-inner">
+      <img src="images/realax-logo-white-small.png" alt="Logo" class="logo">
+      <div class="nav-links">
+        <a href="./">Home</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄首屏 -->
+  <section class="hero-section">
+    <div class="hero-bg-video">
+      <video autoplay loop muted playsinline poster="images/bluegradient-poster-00001.jpg">
+        <source src="images/bluegradient-transcode.mp4" type="video/mp4">
+        <source src="images/bluegradient-transcode.webm" type="video/webm">
+      </video>
+    </div>
+    <div class="container hero-content">
+      <!-- 主品牌Slogan -->
+      <div class="hero-headline-wrap">
+        <h1 class="hero-headline">AI-Native Real Estate Operating Platform</h1>
+      </div>
+      <div class="hero-headline-wrap">
+        <h1 class="hero-headline">Seize Opportunities With Smart Algorithms</h1>
+      </div>
+
+      <!-- 核心定位 -->
+      <p class="hero-desc fade-left hero-tagline" style="font-weight:500;color:#d1d3d8;">
+        Integrate local custodian partnerships and AI-powered asset management to deliver end-to-end intelligent
+        property operations.
+      </p>
+
+      <!-- 痛点文案 -->
+      <p class="hero-desc fade-left" style="margin-top:12px;">
+        Cut high labor costs, simplify complex statements, and eliminate market lag and asset risks. Stop wasting
+        valuable investment resources with outdated management practices.
+      </p>
+
+      <a href="contact.html" class="base-btn fade-left" style="margin-top:15px;">
+        <span>Get in Touch</span>
+        <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+  <!-- 第二板块｜行业痛点对比：传统管理 VS 智能系统 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Pain Points & Solutions</span>
+      </div>
+      <h2 class="sec-title fade-left">Traditional Management VS Intelligent AI System</h2>
+
+      <div class="compare-wrap">
+        <!-- 左侧：传统痛点（从左滑入） -->
+        <div class="compare-card problem fade-card-left">
+          <div class="compare-title problem">
+            <span style="color:#ff7b7b;">•</span> Traditional Management
+          </div>
+          <div class="compare-list">
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Manual financial reports are time-consuming and error-prone</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Late discovery of vacancy, cash flow and overdue risks</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Scattered tenant, vendor and employee data management</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Unclear market rental data and slow response</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Frequent regulation changes with no early warning system</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Investor reports require heavy manual labor</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：智能解决方案（从右滑入） -->
+        <div class="compare-card solution fade-card-right">
+          <div class="compare-title solution">
+            <span style="color:#3b82f6;">✓</span> Our Intelligent Platform
+          </div>
+          <div class="compare-list">
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Full-process automation, reduce 90% repetitive manual work</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Real-time data monitoring with advanced risk early warning</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Unified data management & centralized visual insights</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>24/7 market tracking & accurate peer benchmarking</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Smart compliance & automatic legal updates</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>One-click professional investor report generation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第三板块｜核心王牌：六大AI数字员工 -->
+  <section class="section ai-employees-section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Core Technology</span>
+      </div>
+      <h2 class="sec-title fade-left">6 AI Digital Employees: 24/7 Operation Engine</h2>
+      <p class="fade-left" style="color:#a1a4ac;max-width:700px;">
+        Not just chatbots—our AI employees are full-time digital staff with exclusive operational memory and human-like
+        conversational logic. They don’t just answer questions—they ask, clarify, and remind you proactively.
+      </p>
+
+      <div class="ai-grid"
+        style="position:relative; display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px; align-items:flex-start;">
+
+        <!-- 左侧：滚动 + 依次滑入动画 -->
+        <div class="slide-cards-left" style="display:flex; flex-direction:column; gap:24px;">
+          <div class="ai-card-slide">
+            <h4>Intelligent Interactive Advisor</h4>
+            <p>Human-like proactive dialogue, unique to the platform. Breaks one-way Q&A, with active questioning and
+              information collection. Multi-language tenant reception & smart support included.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Property Maintenance Coordinator</h4>
+            <p>Auto-assigns work orders, connects with vendors, and tracks maintenance progress end-to-end.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Auto Financial Reporting Assistant</h4>
+            <p>Generates weekly/monthly/quarterly reports and investor-specific reports. Answers questions about project
+              finances and operations at any time.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Portfolio Monitoring Assistant</h4>
+            <p>Real-time tracking of vacancy, delinquency, cash flow, and DSCR metrics.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Market Intelligence Analyst</h4>
+            <p>Monitors competitor rents, market trends, supply/demand, and new zoning permits.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Compliance & Risk Assistant</h4>
+            <p>Tracks local regulatory changes across markets and delivers proactive compliance alerts to keep you ahead
+              of legal shifts.</p>
+          </div>
+        </div>
+
+        <!-- 右侧：固定不动 sticky -->
+        <div style="position:sticky; top:120px; height:500px;">
+          <div class="chat-box fade-card-right">
+            <div class="chat-messages" id="chatMessages"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第四板块｜平台总览 Brand Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Brand Overview</span>
+      </div>
+      <h2 class="sec-title fade-left">Platform Core Values & Coverage</h2>
+
+      <!-- 平台初衷 -->
+      <div class="fade-left" style="margin:30px 0;">
+        <h3 style="color:#eef0f5;margin-bottom:12px;font-size:1.2rem;">Platform Original Intention</h3>
+        <p style="color:#a1a4ac;line-height:1.7;">
+          Simplify full-cycle property investment procedures and lower asset operation barriers. We break the common
+          defect of traditional property software that only stores data without intelligent analysis. Supported by
+          exclusive AI situational operation engine and independent operation memory mechanism, the platform becomes
+          increasingly intelligent with continuous use.
+        </p>
+      </div>
+
+      <!-- 适用人群 → 标签已优化，不再像可点击按钮 -->
+      <div class="fade-left" style="margin:30px 0;">
+        <h3 style="color:#eef0f5;margin-bottom:12px;font-size:1.2rem;">Applicable Groups</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <span
+            style="padding:8px 16px;background:rgba(255,255,255,0.03);border-radius:8px;color:#b0b2b8;cursor:default;">Individual
+            property investors</span>
+          <span
+            style="padding:8px 16px;background:rgba(255,255,255,0.03);border-radius:8px;color:#b0b2b8;cursor:default;">Asset
+            management firms</span>
+          <span
+            style="padding:8px 16px;background:rgba(255,255,255,0.03);border-radius:8px;color:#b0b2b8;cursor:default;">Property
+            operation teams</span>
+          <span
+            style="padding:8px 16px;background:rgba(255,255,255,0.03);border-radius:8px;color:#b0b2b8;cursor:default;">Real
+            estate industry practitioners</span>
+        </div>
+      </div>
+
+      <!-- 品牌宣传片区域 -->
+      <div class="fade-up" style="margin-top:50px;">
+        <h3 style="color:#eef0f5;margin-bottom:16px;font-size:1.2rem;">Brand Promotion Video</h3>
+        <p style="color:#a1a4ac;margin-bottom:24px;">
+          Show offline team strength, global office scenes, standardized custody procedures and independent R&D
+          capabilities through real business footage. Help users quickly understand our business model and global
+          service layout, and build solid brand trust intuitively.
+        </p>
+        <div class="video-box">
+          <video muted playsinline id="mainVideo">
+            <source src="https://rems-bucket-20250330.s3.us-east-2.amazonaws.com/vedio/InvestmentPromotion.mp4"
+              type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第五板块｜基础实体业务：线下全链路托管服务 左文右图 原布局 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Offline Service</span>
+      </div>
+      <h2 class="sec-title fade-left">Full-Stack Offline Property Management</h2>
+      <p class="fade-left" style="color:#a1a4ac;max-width:700px;margin-bottom:30px;">
+        We retain our complete offline property management services with real on-site teams and standardized workflows.
+        Every step is executed by local professionals to ensure stable, reliable, and hands-on asset operations.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:20px; align-items:flex-start;">
+        <!-- 左侧：服务列表 -->
+        <div class="fade-card-left" style="display:flex; flex-direction:column; gap:16px;">
+          <div class="ai-card-slide">
+            <h4>Property Marketing & Smart Leasing</h4>
+            <p>Listing optimization, online promotion, tenant sourcing, and intelligent leasing.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Tenant Screening & Risk Control</h4>
+            <p>Background checks, credit verification, identity review, and qualification approval.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Daily Operation & Vendor Management</h4>
+            <p>Maintenance coordination, work order dispatch, on-site support, and vendor scheduling.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Rent Collection & Arrears Management</h4>
+            <p>Automated rent collection, late payment reminders, and delinquency tracking.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Check-Out & Property Inspection</h4>
+            <p>Move-out inspection, condition verification, damage assessment, and deposit processing.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>12 Integrated Full-Process Services</h4>
+            <p>Complete end-to-end operational workflow covering every stage of property management.</p>
+          </div>
+        </div>
+
+        <!-- 右侧：实景配图 -->
+        <div class="fade-card-right" style="position:sticky; top:120px; height:500px;">
+          <img src="images/property-management-offline.png" alt="Offline Property Management Service"
+            style="width:100%; height:100%; border-radius:14px; object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+  <!-- 第六板块｜大数据风控 左右互换 左图右文 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Data Risk Control</span>
+      </div>
+      <h2 class="sec-title fade-left">Visual Data Center | Graphical Risk & Trend Analysis</h2>
+      <p class="fade-left" style="color:#a1a4ac;max-width:700px;margin-bottom:30px;">
+        Intuitive charts, heat maps and real-time dashboards turn complex data into readable visuals, support precise
+        investment judgment.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:20px; align-items:flex-start;">
+        <!-- 左侧数据可视化配图 -->
+        <div class="fade-card-left" style="position:sticky; top:120px; height:500px;">
+          <img src="images/Big-Data-Dashboard.png" alt="Data Visualization Dashboard"
+            style="width:100%; height:100%; border-radius:14px; object-fit:cover;">
+        </div>
+
+        <!-- 右侧功能列表 -->
+        <div class="fade-card-right" style="display:flex; flex-direction:column; gap:16px;">
+          <div class="ai-card-slide">
+            <h4>Market Heat Map Visualization</h4>
+            <p>Integrate massive real estate data, render intuitive city rental heat maps to view regional popularity at
+              a glance.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Dynamic Competitor Chart Monitor</h4>
+            <p>Track surrounding listing prices in real time, display price trend curves and optimize rental strategies
+              visually.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Asset Risk Graphic Screening</h4>
+            <p>Visualize debt ratio, vacancy changes and cash flow fluctuations, trigger abnormal risk alerts instantly.
+            </p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Simulated Trend Forecasting Graph</h4>
+            <p>Generate predictive charts for interest rate, cash flow and holding cycle to evaluate investment
+              benefits.</p>
+          </div>
+          <div class="ai-card-slide">
+            <h4>Regional Planning Visual Monitor</h4>
+            <p>Map urban construction and land layout changes, accurately predict future asset growth space.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+  <!-- 第七板块｜业务版图 全新全宽卡片布局 打破左右结构 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Business Territory</span>
+      </div>
+      <h2 class="sec-title fade-left">Market Layout & Global Operation</h2>
+      <p class="fade-left" style="color:#a1a4ac;max-width:700px;margin-bottom:30px;">
+        Deeply rooted in high-value core cities across the US, we deliver localized on-site operations and integrated
+        asset management.
+      </p>
+
+      <!-- 地图容器：完整显示地图 -->
+      <div class="fade-up"
+        style="border-radius:14px; overflow:hidden; margin-bottom:30px; width:100%; height:380px; background:#000;">
+        <img src="images/world_map.svg" alt="US Market Layout" style="width:100%; height:100%; object-fit:contain;">
+      </div>
+
+      <!-- 城市布局卡片 -->
+      <div class="fade-left" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+        <div class="ai-card-slide text-center">
+          <h4>Baltimore</h4>
+          <p>Local standardized property operation service</p>
+        </div>
+        <div class="ai-card-slide text-center">
+          <h4>New York</h4>
+          <p>High-end asset investment and management</p>
+        </div>
+        <div class="ai-card-slide text-center">
+          <h4>Chicago</h4>
+          <p>Stable regional asset custody operation</p>
+        </div>
+        <div class="ai-card-slide text-center">
+          <h4>Houston</h4>
+          <p>High-potential market layout expansion</p>
+        </div>
+      </div>
+
+      <!-- 体系介绍 -->
+      <div class="fade-left ai-card-slide" style="margin-top:24px;">
+        <h4>Cloud + Offline Global Intelligent Custody System</h4>
+        <p>Combining cloud intelligent system with offline localized services to build a complete global real estate
+          intelligent management system.</p>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第八板块｜使用价值对比：人工 VS AI -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Value Comparison</span>
+      </div>
+      <h2 class="sec-title fade-left">Traditional Management VS AI Intelligent System</h2>
+
+      <div class="compare-wrap">
+        <!-- 左侧传统人工管理 -->
+        <div class="compare-card problem fade-card-left">
+          <div class="compare-title problem">
+            <span style="color:#ff7b7b;">•</span> Traditional Management
+          </div>
+          <div class="compare-list">
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Manually sort financial data, time and labor intensive</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Troublesome manual maintenance & communication</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Spend hours producing investor statements</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Manual inquiry of surrounding rental market</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#ff7b7b;">•</span>
+              <span>Lagging policy update leads to potential risks</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧AI智能管理 -->
+        <div class="compare-card solution fade-card-right">
+          <div class="compare-title solution">
+            <span style="color:#3b82f6;">✓</span> Our AI Intelligent Management
+          </div>
+          <div class="compare-list">
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Auto generate financial analysis reports overnight</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>AI connects suppliers and completes orders automatically</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Full investment reports pushed regularly on time</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Auto update competitor data and real-time market judgment</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Advance compliance warning to avoid industry risks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第九板块｜技术优势+安全体系｜差异化硬实力 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Technical Strength</span>
+      </div>
+      <h2 class="sec-title fade-left">Product Differentiation & Security System</h2>
+
+      <!-- 1. 产品差异化对比卡片 -->
+      <div class="fade-up" style="margin-top:30px;">
+        <h3 style="color:#eef0f5; font-size:1.2rem; margin-bottom:16px;">Product Differentiation Comparison</h3>
+        <div style="overflow-x:auto; border-radius:14px; border:1px solid rgba(255,255,255,0.08);">
+          <table style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.02);">
+            <thead>
+              <tr style="background:rgba(255,255,255,0.04);">
+                <th style="padding:18px 20px; text-align:left; color:#eef0f5; font-weight:500;">Features</th>
+                <th style="padding:18px 20px; text-align:center; color:#3b82f6; font-weight:600;">Our Platform</th>
+                <th style="padding:18px 20px; text-align:center; color:#c8c9cc;">Yardi</th>
+                <th style="padding:18px 20px; text-align:center; color:#c8c9cc;">AppFolio</th>
+                <th style="padding:18px 20px; text-align:center; color:#c8c9cc;">Traditional Tools</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top:1px solid rgba(255,255,255,0.08); transition:background 0.25s ease;"
+                onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.background='transparent'">
+                <td style="padding:16px 20px; color:#b0b2b8;">Property Automation</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">
+                  <span style="display:inline-block; width:18px; text-align:center; color:#3b82f6;">✓</span>
+                  <span style="font-weight:500;">Full Automation</span>
+                </td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Partial Support</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Basic Support</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Manual Only</td>
+              </tr>
+              <tr style="border-top:1px solid rgba(255,255,255,0.08); transition:background 0.25s ease;"
+                onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.background='transparent'">
+                <td style="padding:16px 20px; color:#b0b2b8;">AI Digital Employees</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">
+                  <span style="display:inline-block; width:18px; text-align:center; color:#3b82f6;">✓</span>
+                  <span style="font-weight:500;">6 Built-in Agents</span>
+                </td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Not Supported</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Basic Chat Only</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Not Supported</td>
+              </tr>
+              <tr style="border-top:1px solid rgba(255,255,255,0.08); transition:background 0.25s ease;"
+                onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.background='transparent'">
+                <td style="padding:16px 20px; color:#b0b2b8;">Market & Regulation Monitor</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">
+                  <span style="display:inline-block; width:18px; text-align:center; color:#3b82f6;">✓</span>
+                  <span style="font-weight:500;">Real-time Alert</span>
+                </td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Not Supported</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Not Supported</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Not Supported</td>
+              </tr>
+              <tr style="border-top:1px solid rgba(255,255,255,0.08); transition:background 0.25s ease;"
+                onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.background='transparent'">
+                <td style="padding:16px 20px; color:#b0b2b8;">Data Migration Compatibility</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">
+                  <span style="display:inline-block; width:18px; text-align:center; color:#3b82f6;">✓</span>
+                  <span style="font-weight:500;">No Migration Needed</span>
+                </td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Forced Migration</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Forced Migration</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Incompatible</td>
+              </tr>
+              <tr style="border-top:1px solid rgba(255,255,255,0.08); transition:background 0.25s ease;"
+                onmouseover="this.style.background='rgba(255,255,255,0.06)'"
+                onmouseout="this.style.background='transparent'">
+                <td style="padding:16px 20px; color:#b0b2b8;">Private Deployment</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">
+                  <span style="display:inline-block; width:18px; text-align:center; color:#3b82f6;">✓</span>
+                  <span style="font-weight:500;">Local Private Deploy</span>
+                </td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Cloud Only</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">Cloud Only</td>
+                <td style="padding:16px 20px; text-align:center; color:#a1a4ac;">None</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. 数据安全保障 → 用你网站统一的卡片样式 -->
+      <div class="fade-left" style="margin-top:40px;">
+        <h3 style="color:#eef0f5; font-size:1.2rem; margin-bottom:16px;">Data Security Assurance</h3>
+        <div class="ai-card-slide">
+          <div class="compare-list" style="gap:12px;">
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Support private local deployment, data never leaks</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Full encryption isolation & hierarchical permission management</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>All operations are auditable with full traceable logs</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Data fully owned by clients, exportable at any time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!--第十板块｜定价方案 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Pricing Plan</span>
+      </div>
+      <h2 class="sec-title fade-left">Transparent Charging & Zero Trial Threshold</h2>
+
+      <div class="fade-up"
+        style="margin-top:30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+        <!-- 标准版 -->
+        <div class="ai-card-slide" style="padding:32px; border-radius:14px;">
+          <h3 style="color:#eef0f5; font-size:1.3rem; font-weight:600; margin-bottom:12px;">Standard Version</h3>
+          <p style="color:#3b82f6; font-size:1.8rem; font-weight:700; margin-bottom:24px;">
+            $3 <span style="font-size:1rem; color:#b0b2b8; font-weight:400;">/unit/month</span>
+          </p>
+          <div class="compare-list" style="gap:14px;">
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Basic AI automation management</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Automatic financial report generation</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Real-time market monitoring</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>AI tenant service support</span>
+            </div>
+          </div>
+        </div>
+        <!-- 企业定制版 -->
+        <div class="ai-card-slide" style="padding:32px; border-radius:14px;">
+          <h3 style="color:#eef0f5; font-size:1.3rem; font-weight:600; margin-bottom:12px;">Enterprise Custom Version
+          </h3>
+          <p style="color:#c8c9cc; font-size:1.4rem; font-weight:600; margin-bottom:24px;">Custom Pricing</p>
+          <div class="compare-list" style="gap:14px;">
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>24/7 full-time AI intelligent agents</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Private local deployment support</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Full-function personalized customization</span>
+            </div>
+            <div class="compare-item">
+              <span style="color:#3b82f6;">✓</span>
+              <span>Dedicated technical operation & maintenance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 专属福利 -->
+      <div class="fade-left ai-card-slide" style="margin-top:40px; padding:24px; border-radius:14px;">
+        <h3 style="color:#eef0f5; font-size:1.2rem; margin-bottom:16px;">Exclusive Trial Benefits</h3>
+        <div class="compare-list" style="gap:12px;">
+          <div class="compare-item">
+            <span style="color:#3b82f6;">✓</span>
+            <span>Free trial for asset portfolios within 200 units</span>
+          </div>
+          <div class="compare-item">
+            <span style="color:#3b82f6;">✓</span>
+            <span>No need to replace original system</span>
+          </div>
+          <div class="compare-item">
+            <span style="color:#3b82f6;">✓</span>
+            <span>Seamless parallel operation & zero switching cost</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="spacer"></div>
+  <!-- 第十一板块｜FAQ 常见问题｜打消全部客户顾虑 -->
+  <section class="section">
+    <div class="container">
+      <div class="label-text fade-left">
+        <span class="label-dot"></span>
+        <span>Get Answers</span>
+      </div>
+      <h2 class="sec-title fade-left">FAQ | Resolve All Your Concerns</h2>
+
+      <!-- 手风琴容器 -->
+      <div class="accordion-container fade-left" style="margin-top:24px;">
+        <!-- FAQ 1 -->
+        <div class="accordion-item ai-card-slide">
+          <button class="accordion-header">
+            <span style="color:#3b82f6;">1.</span>
+            <span class="question-text">Does it include full managed service?</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Includes full offline custody + online AI intelligent management, covering the whole process from renting
+              to checking out.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="accordion-item ai-card-slide">
+          <button class="accordion-header">
+            <span style="color:#3b82f6;">2.</span>
+            <span class="question-text">What's the difference from traditional property software?</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Exclusive AI intelligent employees + operational memory, compatible with old systems without data
+              migration.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="accordion-item ai-card-slide">
+          <button class="accordion-header">
+            <span style="color:#3b82f6;">3.</span>
+            <span class="question-text">Can it connect with existing tables and old systems?</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Supports seamless parallel operation without replacing or deleting original data.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="accordion-item ai-card-slide">
+          <button class="accordion-header">
+            <span style="color:#3b82f6;">4.</span>
+            <span class="question-text">Is data secure?</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Supports private deployment, encrypted isolation, and full audit traceability.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="accordion-item ai-card-slide">
+          <button class="accordion-header">
+            <span style="color:#3b82f6;">5.</span>
+            <span class="question-text">What scenarios can AI tools be used in?</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Six real office scenarios: finance, operation & maintenance, tenant services, risk control, marketing,
+              and monitoring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <div class="spacer"></div>
+  <!-- CTA底部引导｜定制行动收口 -->
+<section class="section">
+  <div class="container cta-box">
+    <div class="label-text" style="justify-content:center;">
+      <span class="label-dot"></span>
+      <span>Start Your Upgrade Journey</span>
+    </div>
+    <h2 class="sec-title fade-left" style="max-width:700px;margin:0 auto 16px;">
+      Zero-cost entry, revolutionize your asset management workflow
+    </h2>
+    <p class="fade-left" style="color:#a1a4ac;font-size:1.05rem;margin-bottom:30px;">
+      Private one-on-one demonstration | Tailored asset custody solution | Free access to intelligent AI management
+    </p>
+    <div class="fade-left" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html?type=inquiry" class="base-btn">Business Inquiry</a>
+      <a href="contact.html?type=demo" class="base-btn">Reserve Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Subscribe</h3>
+        <p style="color:#94979f;margin-bottom:15px;">Subscribe to our weekly newsletter for updates, trends, and regulatory news</p>
+        <form action="https://formsubmit.co/support@realaxai.com" method="POST">
+          <input type="hidden" name="_subject" value="Realax Newsletter Subscription">
+          <input type="hidden" name="_next" value="thankYou.html">
+          <input class="footer-input" name="email" placeholder="Your Email" type="email" required>
+          <button class="footer-submit" type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div>
+        <div class="label-text">
+          <span class="label-dot"></span>
+          <span>Quick Links</span>
+        </div>
+        <a href="./" class="footer-link">Home</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <div class="label-text">
+          <span class="label-dot"></span>
+          <span>Contact</span>
+        </div>
+        <a href="mailto:support@realaxai.com" class="footer-link">support@realaxai.com</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Realax AI. All rights reserved.</div>
+  </div>
+</footer>
+  <script>
+    // 1. 滚动入场动画
+    const animateEls = document.querySelectorAll('.fade-left, .fade-up, .fade-card-left, .fade-card-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(item => {
+        if (item.isIntersecting) {
+          item.target.classList.add('animate-show');
+        }
+      })
+    }, { threshold: 0.15 });
+    animateEls.forEach(el => observer.observe(el));
+
+    // 2. 首屏标题逐行动画
+    window.addEventListener('load', () => {
+      const titles = document.querySelectorAll('.hero-headline');
+      titles.forEach((t, i) => {
+        setTimeout(() => {
+          t.style.transform = 'translateY(0)';
+        }, 200 * i)
+      })
+      document.querySelector('.hero-desc').style.opacity = '1';
+      document.querySelector('.hero-desc').style.transform = 'translateX(0)';
+    })
+
+    // 3. 视频视口自动播放逻辑（和原版功能完全一致）
+    const mainVideo = document.getElementById('mainVideo');
+    let hasFinishPlay = false;
+    let tempPlaying = false;
+    let firstAutoPlayDone = false;
+
+    const videoObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const inView = entry.isIntersecting;
+        if (inView && !hasFinishPlay && !firstAutoPlayDone) {
+          firstAutoPlayDone = true;
+          mainVideo.currentTime = 0;
+          mainVideo.play();
+        }
+        if (!inView) {
+          tempPlaying = !mainVideo.paused;
+          mainVideo.pause();
+        }
+        if (inView && tempPlaying) {
+          mainVideo.play();
+          tempPlaying = false;
+        }
+      })
+    }, { threshold: 0.1 });
+    videoObs.observe(mainVideo);
+    mainVideo.addEventListener('ended', () => {
+      hasFinishPlay = true;
+      mainVideo.pause();
+    })
+    // 第三板块：AI数字员工对话动画 → 超慢、清晰、一句一句平滑渐入
+    const chatMessages = document.getElementById('chatMessages');
+    const chatBox = document.querySelector('.chat-box');
+    let chatAnimated = false;
+    const chatFlow = [
+      { role: 'user', text: "Can you check the current vacancy rate for my units?" },
+      { role: 'ai', text: "Sure. Please tell me the property type and bedroom count you’d like to analyze." },
+      { role: 'user', text: "I want to see the vacancy for 2-bedroom apartments." },
+      { role: 'ai', text: "Got it. I’ll show you real-time vacancy rates, average days on market, and turnover trends right away." }
+    ];
+    function addChatMessage(msg, delay) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = `chat-message ${msg.role}`;
+        el.innerHTML = `
+      <span class="chat-avatar ${msg.role}-avatar">${msg.role === 'user' ? 'You' : 'AI'}</span>
+      ${msg.text}
+    `;
+        chatMessages.appendChild(el);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // 慢动作渐入（0.8秒超级顺滑）
+        requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }, delay);
+    }
+
+    const chatObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !chatAnimated) {
+          chatAnimated = true;
+          let delay = 0;
+          chatFlow.forEach((msg) => {
+            addChatMessage(msg, delay);
+            delay += 1200;
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    chatObs.observe(chatBox);
+    // 滚动触发左侧卡片依次滑入
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.ai-card-slide');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cards.forEach(card => observer.observe(card));
+    });
+    // 手风琴交互逻辑
+    document.addEventListener('DOMContentLoaded', function () {
+      const accordionItems = document.querySelectorAll('.accordion-item');
+
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          // 可选：实现“一次只展开一个”效果，去掉下面这行注释即可
+          // accordionItems.forEach(i => i.classList.remove('active'));
+          if (isActive) {
+            item.classList.remove('active');
+          } else {
+            item.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
