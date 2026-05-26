@@ -1135,12 +1135,12 @@
           capabilities through real business footage. Help users quickly understand our business model and global
           service layout, and build solid brand trust intuitively.
         </p>
-        <div class="video-box">
+        <!-- <div class="video-box">
           <video muted playsinline id="mainVideo">
             <source src="https://rems-bucket-20250330.s3.us-east-2.amazonaws.com/vedio/InvestmentPromotion.mp4"
               type="video/mp4">
           </video>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -1723,34 +1723,34 @@
     })
 
     // 3. 视频视口自动播放逻辑（和原版功能完全一致）
-    const mainVideo = document.getElementById('mainVideo');
-    let hasFinishPlay = false;
-    let tempPlaying = false;
-    let firstAutoPlayDone = false;
+    // const mainVideo = document.getElementById('mainVideo');
+    // let hasFinishPlay = false;
+    // let tempPlaying = false;
+    // let firstAutoPlayDone = false;
 
-    const videoObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const inView = entry.isIntersecting;
-        if (inView && !hasFinishPlay && !firstAutoPlayDone) {
-          firstAutoPlayDone = true;
-          mainVideo.currentTime = 0;
-          mainVideo.play();
-        }
-        if (!inView) {
-          tempPlaying = !mainVideo.paused;
-          mainVideo.pause();
-        }
-        if (inView && tempPlaying) {
-          mainVideo.play();
-          tempPlaying = false;
-        }
-      })
-    }, { threshold: 0.1 });
-    videoObs.observe(mainVideo);
-    mainVideo.addEventListener('ended', () => {
-      hasFinishPlay = true;
-      mainVideo.pause();
-    })
+    // const videoObs = new IntersectionObserver((entries) => {
+    //   entries.forEach(entry => {
+    //     const inView = entry.isIntersecting;
+    //     if (inView && !hasFinishPlay && !firstAutoPlayDone) {
+    //       firstAutoPlayDone = true;
+    //       mainVideo.currentTime = 0;
+    //       mainVideo.play();
+    //     }
+    //     if (!inView) {
+    //       tempPlaying = !mainVideo.paused;
+    //       mainVideo.pause();
+    //     }
+    //     if (inView && tempPlaying) {
+    //       mainVideo.play();
+    //       tempPlaying = false;
+    //     }
+    //   })
+    // }, { threshold: 0.1 });
+    // videoObs.observe(mainVideo);
+    // mainVideo.addEventListener('ended', () => {
+    //   hasFinishPlay = true;
+    //   mainVideo.pause();
+    // })
     // 第三板块：AI数字员工对话动画 → 超慢、清晰、一句一句平滑渐入
     const chatMessages = document.getElementById('chatMessages');
     const chatBox = document.querySelector('.chat-box');
